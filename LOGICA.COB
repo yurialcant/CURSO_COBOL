@@ -15,6 +15,17 @@
 
 
        procedure division.
+       0100-PRINCIPAL section.
+
+           perform 0200-INICIAR.
+           perform 0300-PROCESSAR.
+           perform 0400-FINALIZAR.
+           stop run.
+       
+       0100-FIM. exit.
+      
+      *-------------INICIAR
+       0200-INICIAR section.
 
            display "Digite o nome do cliente: ".
                accept WRK-NOME.
@@ -24,7 +35,11 @@
            display "Digite o tipo de conta (C/P): ".
                accept WRK-TIPO-CONTA.
 
-
+       0200-FIM. exit.
+      
+      
+      *-------------PROCESSAR
+       0300-PROCESSAR section.
 
            if WRK-SALDO greater than or equal 1000 and
               (WRK-TIPO-CONTA equal "C" OR  WRK-TIPO-CONTA equal "P")   
@@ -43,4 +58,14 @@
                 end-evaluate
            end-if.
 
-           stop run.
+       0300-FIM. exit.
+
+      
+      *-------------FINALIZAR
+       0400-FINALIZAR section.
+
+           display "-------------------------".
+           display "FIM DO PROCESSAMENTO".
+
+       0400-FIM. exit.
+
