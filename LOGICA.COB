@@ -12,15 +12,20 @@
        01  WRK-SALDO   picture S9(10) comp value zeros.
        01  WRK-SALDO-ED picture Z.ZZZ.ZZZ.ZZ9,99.
        01  WRK-TIPO-CONTA picture x value spaces.
+       01  WRK-CONTADOR picture 9(03) usage comp.
 
 
        procedure division.
        0100-PRINCIPAL section.
 
            perform 0200-INICIAR.
-           perform 0300-PROCESSAR.
+           perform 0300-PROCESSAR varying WRK-CONTADOR
+                                  from 0 by 1 
+                                  until WRK-TIPO-CONTA equal "C"
            perform 0400-FINALIZAR.
            stop run.
+
+           
        
        0100-FIM. exit.
       
@@ -58,6 +63,8 @@
                 end-evaluate
            end-if.
 
+           perform 0200-INICIAR.
+
        0300-FIM. exit.
 
       
@@ -65,7 +72,9 @@
        0400-FINALIZAR section.
 
            display "-------------------------".
-           display "FIM DO PROCESSAMENTO".
+           display "ESTATISTICA".
+           display "contas processadas: " WRK-CONTADOR.
+           display "-------------------------".
 
        0400-FIM. exit.
 
